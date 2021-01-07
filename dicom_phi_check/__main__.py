@@ -9,13 +9,16 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("path", help="path to a DICOM file or folder with DICOM files")
     parser.add_argument(
-        "--overwrite", help="overwrite original DICOM files with anonymized files", default=False, action="store_true"
+        "--overwrite", help="overwrite original files with anonymized files", default=False, action="store_true"
     )
+    parser.add_argument("--verbose", "-v", help="verbose printing", default=False, action="store_true")
     return parser.parse_args()
 
 
 def main(args: argparse.Namespace) -> None:
-    find_phi(args.path, args.overwrite)
+    print(f"Overwrite is set to {args.overwrite}")
+    print(f"Verbose is set to {args.verbose}")
+    find_phi(args.path, args.overwrite, args.verbose)
 
 
 if __name__ == "__main__":

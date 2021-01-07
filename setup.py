@@ -3,6 +3,7 @@ from setuptools import find_packages, setup
 requirements = [
     "dicom-anonymizer",
     "colorama",
+    "pydicom @ git+https://github.com/medcognetics/pydicom.git",
 ]
 
 extras = {"dev": ["pytest", "black", "flake8", "autoflake", "autopep8"]}
