@@ -6,7 +6,7 @@ requirements = [
     "pydicom @ git+https://github.com/medcognetics/pydicom.git",
 ]
 
-extras = {"dev": ["pytest", "black", "flake8", "autoflake", "autopep8"]}
+extras = {"dev": ["pytest", "black", "flake8", "autoflake", "autopep8", "isort"]}
 
 setup(
     name="dicom_phi_check",
