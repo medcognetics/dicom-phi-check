@@ -46,6 +46,7 @@ def find_phi(path: str, overwrite: bool) -> None:
         ds_str = str(copy.deepcopy(ds)).splitlines(keepends=True)
         anonymizeDataset(ds, rules)
 
+        print(filename)
         for diff in color_diff(difflib.ndiff(ds_str, str(ds).splitlines(keepends=True))):
             print(diff)
 
