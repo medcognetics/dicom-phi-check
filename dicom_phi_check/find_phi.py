@@ -68,6 +68,7 @@ def find_phi(path: str, overwrite: bool, verbose: bool) -> None:
 
     for filename in tqdm(filenames):
         ds = pydicom.dcmread(filename)
+        str(ds)  # I think this forces evaluation of certain fields. Without this, the anonymizer may throw an error.
         ds_str = str(copy.deepcopy(ds)).splitlines(keepends=True)
         anonymizeDataset(ds, rules)
 
