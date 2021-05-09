@@ -1,7 +1,7 @@
 from setuptools import find_packages, setup
 
 requirements = [
-    "dicom-anonymizer",
+    "dicom-anonymizer @ git+https://github.com/medcognetics/dicom-anonymizer.git@v1.0.7-fork",
     "colorama",
     "pydicom @ git+https://github.com/medcognetics/pydicom.git",
 ]

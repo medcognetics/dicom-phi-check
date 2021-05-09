@@ -1,11 +1,12 @@
 import copy
 import difflib
 import os
-from typing import Final, Iterator, Tuple
+from typing import Final, Iterator, List, Tuple
 
 import pydicom
 from colorama import Fore, init
-from dicomanonymizer import anonymizeDataset
+from dicomanonymizer import anonymize_dataset
+from pydicom import Dataset
 from tqdm import tqdm
 
 from dicom_phi_check.rules import rules
@@ -63,18 +64,22 @@ def gen_dicoms(path: str) -> Iterator[str]:
                 yield filename
 
 
+def dataset_to_str(ds: Dataset) -> List[str]:
+    return str(ds).splitlines(keepends=True)
+
+
 def find_phi(path: str, overwrite: bool, verbose: bool) -> None:
     filenames = [path] if os.path.isfile(path) else list(gen_dicoms(path))
 
     for filename in tqdm(filenames):
         ds = pydicom.dcmread(filename)
         str(ds)  # I think this forces evaluation of certain fields. Without this, the anonymizer may throw an error.
-        ds_str = str(copy.deepcopy(ds)).splitlines(keepends=True)
-        anonymizeDataset(ds, rules)
+        ds_str = dataset_to_str(copy.deepcopy(ds))
+        anonymize_dataset(ds, rules)
 
         if verbose:
             print(filename)
-            for diff in color_diff(difflib.ndiff(ds_str, str(ds).splitlines(keepends=True))):
+            for diff in color_diff(difflib.ndiff(ds_str, dataset_to_str(ds))):
                 print(diff)
 
         if overwrite:

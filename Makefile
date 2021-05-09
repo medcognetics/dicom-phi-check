@@ -23,7 +23,8 @@ quality: $(VENV)
 	$(PYTHON) black --check *.py --line-length=120
 	$(PYTHON) flake8 *.py
 
-$(VENV): init
+$(VENV):
+	$(MAKE) init
 
 init:
 	python3 -m virtualenv -p $(PY_VER) $(VENV)
