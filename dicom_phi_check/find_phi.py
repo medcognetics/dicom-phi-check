@@ -4,15 +4,11 @@ import os
 from typing import Final, Iterator, List, Tuple
 
 import pydicom
-from colorama import Fore, init
-from dicomanonymizer import anonymize_dataset
+from colorama import Fore
 from pydicom import Dataset
 from tqdm import tqdm
 
-from dicom_phi_check.rules import rules
-
-init()
-
+from .anonymize import anonymize
 
 Tag = Tuple[str, str]
 
@@ -75,7 +71,7 @@ def find_phi(path: str, overwrite: bool, verbose: bool) -> None:
         ds = pydicom.dcmread(filename)
         str(ds)  # I think this forces evaluation of certain fields. Without this, the anonymizer may throw an error.
         ds_str = dataset_to_str(copy.deepcopy(ds))
-        anonymize_dataset(ds, rules)
+        anonymize(ds)
 
         if verbose:
             print(filename)
