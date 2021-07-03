@@ -5,7 +5,7 @@ import pydicom
 import pytest
 
 from dicom_phi_check.anonymize import *
-from dicom_phi_check.hash import medcog_addr, medcog_name
+from dicom_phi_check.hash import medcog_addr, medcog_name, private_fields_description
 
 num_dicom_test_files: Final[int] = 3
 
@@ -63,8 +63,9 @@ def test_anonymize(test_dicom) -> None:
     anonymize(ds)
 
     block = get_medcog_block(ds)
+    assert block[0].value == private_fields_description
     for i, value in enumerate(hash_values):
-        assert block[i].value == value
+        assert block[i + 1].value == value
 
 
 def test_is_anonymized(test_dicom) -> None:

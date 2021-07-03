@@ -10,6 +10,7 @@ from dicom_phi_check.hash import (
     hash_any,
     medcog_addr,
     medcog_name,
+    private_fields_description,
     store_value_hashes,
 )
 
@@ -48,5 +49,6 @@ def test_store_value_hashes(dicom_test_file) -> None:
     hash_values = get_value_hashes(ds)
     store_value_hashes(ds, hash_values)
     block = ds.private_block(medcog_addr, medcog_name)
+    assert block[0].value == private_fields_description
     for i, value in enumerate(hash_values):
-        assert block[i].value == value
+        assert block[i + 1].value == value
