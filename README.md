@@ -1,8 +1,11 @@
 # DICOM Patient Health Information Check
 Check DICOM files for confidential information and optionally overwrite the files with anonymized copies.
 ## Usage
+First create a Python virtual environment and run all necessary setup with the following commad:
 ```
 $ make init
-$ source env/bin/activate
-$ python3 -m dicom_phi_check -h
+```
+Then run the tool with the help menu flag `-h` to see detailed information for using the tool:
+```
+$ env/bin/python3 -m dicom_phi_check -h
 ```
