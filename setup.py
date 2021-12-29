@@ -13,7 +13,9 @@ requirements: Final[List[str]] = [
     "pydicom @ git+https://github.com/medcognetics/pydicom.git",
 ]
 
-extras: Final[Dict[str, List[str]]] = {"dev": ["pytest", "black", "flake8", "autoflake", "autopep8", "isort"]}
+extras: Final[Dict[str, List[str]]] = {
+    "dev": ["pytest", "black", "flake8", "autoflake", "autopep8", "isort", "coverage"]
+}
 
 with open("README.md", "r", encoding="utf-8") as f:
     long_description = f.read()
