@@ -4,3 +4,8 @@ env
 tmp*
 __pycache__
 node_modules
+*version.py
+.coverage
+coverage.xml
+.pytest_cache
+.env
