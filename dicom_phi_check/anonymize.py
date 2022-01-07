@@ -1,10 +1,12 @@
 import re
-from typing import Any, Callable, Dict, Final, Optional, Tuple
+from typing import Any, Callable, Dict, Final, Optional, Tuple, TypeVar
 
 from dicomanonymizer import anonymize_dataset
 from pydicom import Dataset
 
 from .hash import get_medcog_block, get_value_hashes, medcog_name, store_value_hashes
+
+T = TypeVar("T")
 
 
 class RuleHandler:
@@ -15,6 +17,13 @@ class RuleHandler:
         element = dataset.get(tag)
         if element is not None:
             element.value = self.handler(element.value)
+
+
+def return_input(x: T) -> T:
+    return x
+
+
+preserve_value: Final[RuleHandler] = RuleHandler(return_input)
 
 
 def str_to_first_int(s: str) -> Optional[int]:
@@ -35,8 +44,9 @@ def age_to_anonymized_age(age_str: str) -> str:
 
 
 TagTuple = Tuple[int, int]
+RuleMap = Dict[TagTuple, RuleHandler]
 
-rules: Final[Dict[TagTuple, RuleHandler]] = {
+rules: Final[RuleMap] = {
     (0x0010, 0x1010): RuleHandler(age_to_anonymized_age),
 }
 

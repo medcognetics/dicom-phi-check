@@ -1,4 +1,7 @@
-# DICOM Patient Health Information Check
+__NOTE__: This repository is no longer updated. Please check out PHI handling in [dicom-utils](https://github.com/medcognetics/dicom-utils).
+***
+
+# DICOM Protected Health Information Check
 Check DICOM files for confidential information and optionally overwrite the files with anonymized copies.
 ## Usage
 First create a Python virtual environment and run all necessary setup with the following commad:
@@ -14,4 +17,4 @@ If anonymization is enabled, fields defined in
 [this script](https://github.com/medcognetics/dicom-anonymizer/blob/master/dicomanonymizer/dicomfields.py)
 are anonymized
 with the exception of fields which are affected by additional rules located 
-[here](https://github.com/medcognetics/dicom_phi_check/blob/master/dicom_phi_check/anonymize.py).
+[here](https://github.com/medcognetics/dicom-phi-check/blob/master/dicom_phi_check/anonymize.py).

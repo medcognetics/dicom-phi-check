@@ -5,7 +5,7 @@ from dicom_phi_check.find_phi import find_phi
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="CLI tool for identifying and optionally overwriting DICOM fields with patient health information."
+        description="CLI tool for identifying and overwriting DICOM fields with protected health information."
     )
     parser.add_argument("path", help="path to a DICOM file or folder with DICOM files")
     parser.add_argument(
